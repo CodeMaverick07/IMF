@@ -1,15 +1,19 @@
-import express from "express";
+import express, { Request, Response } from "express";
 import { PrismaClient } from "@prisma/client";
 import gadgetRoutes from "./routes/gadgetRoutes";
 import dotenv from "dotenv";
+import cors from "cors";
 
 dotenv.config();
 
 const app = express();
 const prisma = new PrismaClient();
-
+app.use(cors());
 app.use(express.json());
 app.use("/gadgets", gadgetRoutes);
+app.get("/", (req: Request, res: Response) => {
+  res.send("Welcome to IMF API");
+});
 
 const PORT = process.env.PORT || 3000;
 

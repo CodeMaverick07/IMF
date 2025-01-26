@@ -11,11 +11,11 @@ import { authenticate } from "../middleware/authMiddleware";
 
 const router = express.Router();
 
-router.get("/", getAllGadgets);
-router.post("/", createGadget);
-router.patch("/:id", updateGadget);
-router.delete("/:id", decommissionGadget);
-router.post("/:id/self-destruct", selfDestructGadget);
+router.get("/", authenticate, getAllGadgets);
+router.post("/", authenticate, createGadget);
+router.patch("/:id", authenticate, updateGadget);
+router.delete("/:id", authenticate, decommissionGadget);
+router.post("/:id/self-destruct", authenticate, selfDestructGadget);
 router.post("/login", loginAgent);
 
 export default router;
